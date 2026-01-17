@@ -170,12 +170,6 @@ export default function HomePage() {
             <div className="footerCard glass">
               <div className="footerRow">
                 <span>© {new Date().getFullYear()} Miss Jess</span>
-                <span className="dot">·</span>
-                <a href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">
-                  github
-                </a>
-                <span className="dot">·</span>
-                <a href="/journal">journal</a>
               </div>
             </div>
           </footer>
@@ -473,17 +467,31 @@ export default function HomePage() {
           z-index: 3;
         }
 
-        .footer{ position:relative; z-index:1; margin-top: 34px; }
-        .footerCard{ padding: 12px 14px; }
-        .footerRow{
-          display:flex;
-          flex-wrap:wrap;
-          gap:10px;
-          align-items:center;
-          justify-content:center;
-          color: rgba(11,26,42,.72);
-          font-size: 13.5px;
+        .footer{
+          margin-top: 18px;
+          display: flex;
+          justify-content: flex-end; /* pushes card to right */
         }
+
+        .footerCard{
+          display: inline-flex;
+          align-items: center;
+          justify-content: flex-end;
+
+          /* rectangle look */
+          border-radius: 12px;                 /* not pill */
+          border: 1px solid rgba(255,255,255,.70);
+          background: rgba(255,255,255,.28);
+          padding: 12px 14px;
+          box-shadow: 0 12px 26px rgba(20,60,110,.10);
+        }
+
+        .footerRow{
+          font-size: 13.5px;
+          font-weight: 700;
+          color: rgba(11,26,42,.72);
+        }
+
         .dot{ opacity:.55; }
 
         @media (max-width: 900px){
