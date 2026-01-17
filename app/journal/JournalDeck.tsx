@@ -11,7 +11,7 @@ type JournalEntry = {
   mood: string;
   tags?: string[];
   searchText?: string;
-  Card: () => JSX.Element;
+  Card: () => React.ReactNode;
 };
 
 // helper: show as "Jan 16, 2026"
