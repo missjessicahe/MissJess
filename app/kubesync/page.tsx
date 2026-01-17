@@ -45,7 +45,7 @@ export default async function KubeSyncPage() {
         </header>
 
         <section className="hero glass">
-          <div className="badge">🛰️ project</div>
+          <div className="badge">📻 project</div>
           <h1>KubeSync</h1>
 
           <p>
@@ -56,7 +56,7 @@ export default async function KubeSyncPage() {
           {repo && (
             <div className="repoPills" aria-label="Repository stats">
               <span className="pill">⭐ {repo.stargazers_count.toLocaleString()}</span>
-              <span className="pill">🍴 {repo.forks_count.toLocaleString()}</span>
+              <span className="pill">⚡️ {repo.forks_count.toLocaleString()}</span>
               {updated && <span className="pill">🫧 updated {updated}</span>}
             </div>
           )}

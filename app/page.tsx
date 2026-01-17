@@ -1,4 +1,6 @@
 // app/page.tsx
+import JournalDeck from "./journal/JournalDeck";
+
 export default function HomePage() {
   const updated = "Jan 16, 2026";
 
@@ -18,19 +20,25 @@ export default function HomePage() {
         <header className="topbar">
           <div className="brand">
             <div className="avatar" aria-hidden="true">
-              MJ
+              J.
             </div>
             <div className="brandText">
               <div className="name">Miss Jess</div>
-              <div className="tag">one-page journal · light-blue bubbles · git-backed</div>
+              <div className="tag">portfolio · bubble iOS · git-backed</div>
             </div>
           </div>
 
           <nav className="nav">
+            <a className="pill" href="/journal">Journal</a>
             <a className="pill" href="/whimsical">Whimsical</a>
             <a className="pill" href="/kubesync">KubeSync</a>
             <a className="pill" href="/kubecard">KubeCard</a>
-            <a className="pill ghost" href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">
+            <a
+              className="pill ghost"
+              href="https://github.com/missjessicahe"
+              target="_blank"
+              rel="noreferrer"
+            >
               GitHub ↗
             </a>
           </nav>
@@ -38,21 +46,24 @@ export default function HomePage() {
 
         <section className="hero">
           <div className="heroCard glass">
-            <div className="sparkle" aria-hidden="true">✦</div>
+            <div className="sparkle" aria-hidden="true">
+              ✦
+            </div>
             <h1>Hi, I’m Jess 🫧</h1>
             <p>
-              This is my tiny, cozy corner of the internet — a journal + portfolio that updates whenever I push commits.
-              I like clean systems, gentle aesthetics, and projects that feel alive.
+              This is my tiny, cozy corner of the internet — a journal + portfolio
+              that updates whenever I push commits. I like clean systems, gentle
+              aesthetics, and projects that feel alive.
             </p>
 
             <div className="metaRow">
               <span className="metaChip">Last updated: {updated}</span>
               <span className="metaChip">Theme: Bubble iOS · light blues</span>
-              <span className="metaChip">Deploy: Vercel/Netlify ready</span>
+              <span className="metaChip">Deploy: Vercel</span>
             </div>
 
             <div className="ctaRow">
-              <a className="cta primary" href="#journal">Read today’s entry</a>
+              <a className="cta primary" href="/journal">Open Journal Deck</a>
               <a className="cta" href="#projects">See projects</a>
             </div>
           </div>
@@ -72,9 +83,7 @@ export default function HomePage() {
             </div>
             <div className="mini glass">
               <div className="miniTitle">How it updates</div>
-              <div className="miniBody">
-                edit a file → commit → push → auto rebuild
-              </div>
+              <div className="miniBody">edit → commit → push → auto rebuild</div>
             </div>
           </div>
         </section>
@@ -88,7 +97,7 @@ export default function HomePage() {
           <div className="grid">
             <a className="card glass" href="/whimsical">
               <div className="cardTop">
-                <div className="icon">🧚‍♀️</div>
+                <div className="icon">🍓</div>
                 <div>
                   <div className="cardTitle">Whimsical</div>
                   <div className="cardSub">A playful project showcase</div>
@@ -102,7 +111,7 @@ export default function HomePage() {
 
             <a className="card glass" href="/kubesync">
               <div className="cardTop">
-                <div className="icon">🛰️</div>
+                <div className="icon">📻</div>
                 <div>
                   <div className="cardTitle">KubeSync</div>
                   <div className="cardSub">Resilience / comms prototype</div>
@@ -116,51 +125,42 @@ export default function HomePage() {
 
             <a className="card glass" href="/kubecard">
               <div className="cardTop">
-                <div className="icon">🪪</div>
+                <div className="icon">🧾</div>
                 <div>
                   <div className="cardTitle">KubeCard</div>
                   <div className="cardSub">Research + literature</div>
                 </div>
               </div>
               <div className="cardBody">
-                A polished page for your write-ups, citations, and artifacts.
+                A polished page for write-ups, citations, and artifacts.
               </div>
               <div className="cardFoot">Open →</div>
             </a>
           </div>
         </section>
 
-        <section id="journal" className="section">
+        {/* Journal CTA section (replaces the long journal entry on the homepage) */}
+        <section className="section">
           <div className="sectionHeader">
             <h2>Journal</h2>
-            <p>One-page, scrollable, and easy to edit.</p>
+            <p>Card-style entries with sort + search (updated by commits).</p>
           </div>
 
-          <article className="journal glass">
-            <div className="journalHead">
-              <div className="journalDate">Jan 16, 2026</div>
-              <div className="journalMood">Mood: light-blue focus · gentle momentum 🫧</div>
+          <div className="journalCta glass">
+            <div className="journalCtaLeft">
+              <JournalDeck embedded />
+              <div className="ctaRow" style={{ marginTop: 12 }}>
+                <a
+                  className="cta"
+                  href="https://github.com/missjessicahe/MissJess"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Repo ↗
+                </a>
+              </div>
             </div>
-
-            <h3>Build Log</h3>
-            <ul>
-              <li>Connected domain plan: <b>missjess.co</b> + path pages (/whimsical, /kubesync, /kubecard).</li>
-              <li>Decided: no database — GitHub commits are my “publish” button.</li>
-              <li>Made the site feel like iOS bubbles: glass cards, soft gradients, floating dots.</li>
-            </ul>
-
-            <h3>Today’s tiny goals</h3>
-            <div className="checklist">
-              <label className="check"><input type="checkbox" /> push clean repo + deploy</label>
-              <label className="check"><input type="checkbox" /> add project descriptions + links</label>
-              <label className="check"><input type="checkbox" /> write 3–5 journal lines per day</label>
-            </div>
-
-            <h3>Note to future me</h3>
-            <p>
-              Keep it simple. Cute beats complicated. If it’s easy to update, it will stay alive.
-            </p>
-          </article>
+          </div>
         </section>
 
         <footer className="footer">
@@ -168,9 +168,11 @@ export default function HomePage() {
             <div className="footerRow">
               <span>© {new Date().getFullYear()} Miss Jess</span>
               <span className="dot">·</span>
-              <a href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">github</a>
+              <a href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">
+                github
+              </a>
               <span className="dot">·</span>
-              <a href="#journal">journal</a>
+              <a href="/journal">journal</a>
             </div>
           </div>
         </footer>
@@ -390,51 +392,61 @@ export default function HomePage() {
         .cardBody{ color: var(--muted); font-size: 14px; line-height:1.5; margin: 6px 0 10px; }
         .cardFoot{ font-weight:700; font-size: 14px; }
 
-        .journal{
-          padding: 18px 18px 16px;
-        }
-        .journalHead{
+        /* journal CTA */
+        .journalCta{
+          padding: 18px;
           display:flex;
-          gap:10px;
-          flex-wrap:wrap;
+          gap: 14px;
+          align-items:stretch;
           justify-content:space-between;
-          align-items:center;
-          margin-bottom: 12px;
         }
-        .journalDate{
-          font-weight:850;
-          letter-spacing:-.02em;
+        .journalCtaLeft{ flex: 1; min-width: 240px; }
+        .journalCtaRight{
+          display:grid;
+          gap:10px;
+          min-width: 220px;
+          align-content:start;
+          justify-items:stretch;
         }
-        .journalMood{
-          color: var(--muted);
-          font-size: 13px;
+        .journalBadge{
+          display:inline-block;
           padding: 7px 10px;
           border-radius: 999px;
           background: rgba(255,255,255,.4);
           border: 1px solid rgba(255,255,255,.65);
+          color: rgba(11,26,42,.8);
+          font-size: 13px;
+          margin-bottom: 10px;
         }
-        .journal h3{
-          margin: 14px 0 8px;
+        .journalHeadline{
+          font-weight: 900;
           letter-spacing:-.02em;
+          font-size: 18px;
+          margin-bottom: 6px;
         }
-        .journal p, .journal li{
+        .journalSub{
           color: var(--muted);
-          line-height: 1.6;
-          font-size: 14.5px;
+          font-size: 14px;
+          line-height: 1.55;
+          margin-bottom: 12px;
+          max-width: 60ch;
         }
-        .checklist{ display:grid; gap:8px; margin: 10px 0 6px; }
-        .check{
-          display:flex;
-          align-items:center;
-          gap:10px;
-          padding: 10px 12px;
-          border-radius: 14px;
+        .stat{
+          padding: 12px 12px 10px;
+          border-radius: 18px;
           background: rgba(255,255,255,.35);
           border: 1px solid rgba(255,255,255,.65);
         }
-        input[type="checkbox"]{
-          width: 18px; height: 18px;
-          accent-color: #4ea6ff;
+        .statNum{
+          font-weight: 950;
+          font-size: 22px;
+          line-height: 1;
+          letter-spacing:-.02em;
+        }
+        .statLabel{
+          margin-top: 6px;
+          color: rgba(11,26,42,.72);
+          font-size: 12.5px;
         }
 
         .footer{ position:relative; z-index:1; margin-top: 34px; }
@@ -455,7 +467,12 @@ export default function HomePage() {
           .grid{ grid-template-columns: 1fr; }
           .topbar{ flex-direction:column; align-items:flex-start; }
           .nav{ justify-content:flex-start; }
+          .journalCta{ flex-direction:column; }
+          .journalCtaRight{ min-width: unset; grid-template-columns: repeat(3, 1fr); }
         }
+          .jdEmbedded .jdCard{
+            height: 360px;
+          }
       `}</style>
     </>
   );
