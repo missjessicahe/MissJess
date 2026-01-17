@@ -8,5 +8,4 @@ export const ALL_ENTRIES = [
   entry2,
   entry3,
   entry4,
-  // ...
 ] as const;

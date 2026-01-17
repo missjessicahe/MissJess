@@ -1,0 +1,310 @@
+/* app/journal/journal.css */
+
+:root{
+  /* ink */
+  --jd-ink: rgba(11, 26, 42, 0.88);
+  --jd-ink-soft: rgba(11, 26, 42, 0.72);
+  --jd-ink-faint: rgba(11, 26, 42, 0.56);
+
+  /* glass */
+  --jd-glass: rgba(255,255,255,0.32);
+  --jd-glass-strong: rgba(255,255,255,0.44);
+  --jd-border: rgba(255,255,255,0.70);
+
+  /* shadows */
+  --jd-shadow: 0 18px 40px rgba(20,60,110,0.14);
+  --jd-shadow-soft: 0 10px 22px rgba(20,60,110,0.10);
+
+  /* accents */
+  --jd-accent: rgba(255,255,255,0.92);
+  --jd-accent-soft: rgba(255,255,255,0.55);
+}
+
+/* ============= Card shell ============= */
+
+.jdCard{
+  border-radius: 26px;
+  border: 1px solid var(--jd-border);
+  background: var(--jd-glass);
+  box-shadow: var(--jd-shadow);
+  overflow: hidden;
+  position: relative;
+  isolation: isolate;
+}
+
+.jdCard::before{
+  content:"";
+  position:absolute;
+  inset:-45%;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255,255,255,0.70), transparent 58%),
+    radial-gradient(circle at 80% 35%, rgba(255,255,255,0.55), transparent 62%),
+    radial-gradient(circle at 45% 85%, rgba(255,255,255,0.45), transparent 60%);
+  filter: blur(18px);
+  opacity: 0.70;
+  transform: translateZ(0);
+  pointer-events:none;
+  z-index: 0;
+}
+
+/* header */
+.jdCardHead{
+  position: relative;
+  z-index: 1;
+  display:flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+
+  padding: 16px 16px 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.60);
+  background: rgba(255,255,255,0.20);
+  backdrop-filter: blur(10px);
+}
+
+.jdCardTitle{
+  font-weight: 950;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  color: var(--jd-ink);
+  line-height: 1.15;
+}
+
+.jdCardSub{
+  margin-top: 4px;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: var(--jd-ink-faint);
+}
+
+/* tags */
+.jdTags{
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  max-width: 55%;
+}
+
+.jdTag{
+  font-size: 12px;
+  font-weight: 900;
+  color: var(--jd-ink-soft);
+
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.38);
+  box-shadow: var(--jd-shadow-soft);
+  white-space: nowrap;
+}
+
+/* ============= Scrollable body + typography ============= */
+
+.jdCardBody{
+  position: relative;
+  z-index: 1;
+
+  padding: 14px 16px 16px;
+  color: var(--jd-ink);
+  font-size: 14.5px;
+  line-height: 1.58;
+
+  /* if you already set height elsewhere, this just makes it nicer */
+  overflow: auto;
+  scrollbar-gutter: stable;
+}
+
+/* nice text rhythm */
+.jdCardBody p{
+  margin: 10px 0 0;
+  color: var(--jd-ink-soft);
+}
+
+.jdCardBody p:first-child{ margin-top: 0; }
+
+/* headings inside entry content */
+.jdCardBody h3{
+  margin: 16px 0 8px;
+  font-size: 12.5px;
+  font-weight: 950;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(11, 26, 42, 0.72);
+
+  display:flex;
+  align-items:center;
+  gap: 10px;
+}
+
+.jdCardBody h3::before{
+  content:"";
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.70);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.25));
+  box-shadow: 0 10px 20px rgba(20,60,110,0.10);
+}
+
+/* links if you use them */
+.jdCardBody a{
+  color: rgba(11,26,42,0.82);
+  font-weight: 900;
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(11,26,42,0.22);
+}
+.jdCardBody a:hover{
+  border-bottom-color: rgba(11,26,42,0.40);
+}
+
+/* strong / bold */
+.jdCardBody b,
+.jdCardBody strong,
+.jdStrong{
+  color: var(--jd-ink);
+  font-weight: 950;
+}
+
+/* inline code */
+.jdCardBody code,
+.jdMono{
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-weight: 800;
+  font-size: 12.5px;
+  color: rgba(11,26,42,0.82);
+
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.70);
+  background: rgba(255,255,255,0.40);
+}
+
+/* lists = bubble bullets */
+.jdCardBody ul{
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 8px;
+}
+
+.jdCardBody li{
+  display:flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--jd-ink-soft);
+}
+
+.jdCardBody li::before{
+  content:"";
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  margin-top: 7px;
+
+  border: 1px solid rgba(255,255,255,0.70);
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.22));
+  box-shadow: 0 10px 18px rgba(20,60,110,0.08);
+  flex: 0 0 auto;
+}
+
+/* subtle separators (optional) */
+.jdSection{
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.55);
+}
+
+.jdH3{ /* if you use your Section component */
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 950;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(11, 26, 42, 0.72);
+}
+
+.jdSectionBody{ margin-top: 8px; }
+
+/* callout look */
+.jdCallout{
+  margin-top: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.30);
+  padding: 12px 12px;
+  box-shadow: var(--jd-shadow-soft);
+}
+.jdCalloutTitle{
+  font-weight: 950;
+  color: var(--jd-ink);
+  letter-spacing: -0.01em;
+}
+.jdCalloutSmall{
+  margin-top: 6px;
+  color: var(--jd-ink-soft);
+  font-size: 13px;
+}
+
+/* ============= Scroll hint fades ============= */
+
+.jdScrollHintTop,
+.jdScrollHintBottom{
+  position: sticky;
+  left: 0;
+  right: 0;
+  height: 14px;
+  pointer-events:none;
+  z-index: 2;
+}
+
+.jdScrollHintTop{
+  top: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+}
+
+.jdScrollHintBottom{
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(255,255,255,0.55), rgba(255,255,255,0));
+}
+
+/* ============= Scrollbar polish ============= */
+
+.jdCardBody::-webkit-scrollbar{ width: 10px; }
+.jdCardBody::-webkit-scrollbar-track{
+  background: rgba(255,255,255,0.18);
+  border-left: 1px solid rgba(255,255,255,0.35);
+}
+.jdCardBody::-webkit-scrollbar-thumb{
+  background: rgba(255,255,255,0.50);
+  border: 1px solid rgba(255,255,255,0.60);
+  border-radius: 999px;
+}
+.jdCardBody::-webkit-scrollbar-thumb:hover{
+  background: rgba(255,255,255,0.62);
+}
+
+/* ============= Dots reel ============= */
+
+.jdDots{
+  margin-top: 12px;
+  display:flex;
+  justify-content:center;
+  gap: 10px;
+}
+
+.jdDot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.70);
+  background: rgba(255,255,255,0.30);
+  cursor: pointer;
+  box-shadow: 0 10px 18px rgba(20,60,110,0.08);
+}
+
+.jdDot.active{
+  background: rgba(255,255,255,0.85);
+  transform: scale(1.08);
+}

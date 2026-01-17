@@ -6,199 +6,207 @@ export default function HomePage() {
 
   return (
     <>
-      <main className="shell">
-        {/* soft floating bubbles */}
-        <div className="bubbles" aria-hidden="true">
-          <span className="b b1" />
-          <span className="b b2" />
-          <span className="b b3" />
-          <span className="b b4" />
-          <span className="b b5" />
-          <span className="b b6" />
-        </div>
-
-        <header className="topbar">
-          <div className="brand">
-            <div className="avatar" aria-hidden="true">
-              J.
-            </div>
-            <div className="brandText">
-              <div className="name">Miss Jess</div>
-              <div className="tag">portfolio · bubble iOS · git-backed</div>
-            </div>
+      {/* ✅ Scope ALL “global-looking” styles to this wrapper so JournalDeck styles don’t fight it */}
+      <main className="homeWrap">
+        <div className="shell">
+          {/* soft floating bubbles */}
+          <div className="bubbles" aria-hidden="true">
+            <span className="b b1" />
+            <span className="b b2" />
+            <span className="b b3" />
+            <span className="b b4" />
+            <span className="b b5" />
+            <span className="b b6" />
           </div>
 
-          <nav className="nav">
-            <a className="pill" href="/journal">Journal</a>
-            <a className="pill" href="/whimsical">Whimsical</a>
-            <a className="pill" href="/kubesync">KubeSync</a>
-            <a className="pill" href="/kubecard">KubeCard</a>
-            <a
-              className="pill ghost"
-              href="https://github.com/missjessicahe"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub ↗
-            </a>
-          </nav>
-        </header>
-
-        <section className="hero">
-          <div className="heroCard glass">
-            <div className="sparkle" aria-hidden="true">
-              ✦
-            </div>
-            <h1>Hi, I’m Jess 🫧</h1>
-            <p>
-              This is my tiny, cozy corner of the internet — a journal + portfolio
-              that updates whenever I push commits. I like clean systems, gentle
-              aesthetics, and projects that feel alive.
-            </p>
-
-            <div className="metaRow">
-              <span className="metaChip">Last updated: {updated}</span>
-              <span className="metaChip">Theme: Bubble iOS · light blues</span>
-              <span className="metaChip">Deploy: Vercel</span>
-            </div>
-
-            <div className="ctaRow">
-              <a className="cta primary" href="/journal">Open Journal Deck</a>
-              <a className="cta" href="#projects">See projects</a>
-            </div>
-          </div>
-
-          <div className="sideStack">
-            <div className="mini glass">
-              <div className="miniTitle">Now</div>
-              <div className="miniBody">
-                building <b>missjess.co</b> → journal + project pages
+          <header className="topbar">
+            <div className="brand">
+              <div className="avatar" aria-hidden="true">
+                J.
+              </div>
+              <div className="brandText">
+                <div className="name">Miss Jess</div>
+                <div className="tag">portfolio · bubble iOS · git-backed</div>
               </div>
             </div>
-            <div className="mini glass">
-              <div className="miniTitle">Vibe</div>
-              <div className="miniBody">
-                soft gradients, glass cards, floating bubbles ✧
-              </div>
-            </div>
-            <div className="mini glass">
-              <div className="miniTitle">How it updates</div>
-              <div className="miniBody">edit → commit → push → auto rebuild</div>
-            </div>
-          </div>
-        </section>
 
-        <section id="projects" className="section">
-          <div className="sectionHeader">
-            <h2>Projects</h2>
-            <p>Little portals into the things I’m building.</p>
-          </div>
+            <nav className="nav">
+              <a className="pill" href="/whimsical">
+                Whimsical
+              </a>
+              <a className="pill" href="/kubesync">
+                KubeSync
+              </a>
+              <a className="pill" href="/kubecard">
+                KubeCard
+              </a>
+              <a
+                className="pill ghost"
+                href="https://github.com/missjessicahe"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub ↗
+              </a>
+            </nav>
+          </header>
 
-          <div className="grid">
-            <a className="card glass" href="/whimsical">
-              <div className="cardTop">
-                <div className="icon">🍓</div>
-                <div>
-                  <div className="cardTitle">Whimsical</div>
-                  <div className="cardSub">A playful project showcase</div>
-                </div>
+          <section className="hero">
+            <div className="heroCard glass">
+              <div className="sparkle" aria-hidden="true">
+                ✦
               </div>
-              <div className="cardBody">
-                A cute, demo-friendly page that can mirror your GitHub README later.
-              </div>
-              <div className="cardFoot">Open →</div>
-            </a>
+              <h1>Hi, I’m Jess 🫧</h1>
+              <p>
+                This is my tiny, cozy corner of the internet — a journal + portfolio
+                that updates whenever I push commits. I like clean systems, gentle
+                aesthetics, and projects that feel alive.
+              </p>
 
-            <a className="card glass" href="/kubesync">
-              <div className="cardTop">
-                <div className="icon">📻</div>
-                <div>
-                  <div className="cardTitle">KubeSync</div>
-                  <div className="cardSub">Resilience / comms prototype</div>
-                </div>
+              <div className="metaRow">
+                <span className="metaChip">Last updated: {updated}</span>
+                <span className="metaChip">Theme: Bubble iOS · light blues</span>
+                <span className="metaChip">Deploy: Vercel</span>
               </div>
-              <div className="cardBody">
-                A landing page for the KubeSync concept, links, and updates.
-              </div>
-              <div className="cardFoot">Open →</div>
-            </a>
 
-            <a className="card glass" href="/kubecard">
-              <div className="cardTop">
-                <div className="icon">🧾</div>
-                <div>
-                  <div className="cardTitle">KubeCard</div>
-                  <div className="cardSub">Research + literature</div>
-                </div>
-              </div>
-              <div className="cardBody">
-                A polished page for write-ups, citations, and artifacts.
-              </div>
-              <div className="cardFoot">Open →</div>
-            </a>
-          </div>
-        </section>
-
-        {/* Journal CTA section (replaces the long journal entry on the homepage) */}
-        <section className="section">
-          <div className="sectionHeader">
-            <h2>Journal</h2>
-            <p>Card-style entries with sort + search (updated by commits).</p>
-          </div>
-
-          <div className="journalCta glass">
-            <div className="journalCtaLeft">
-              <JournalDeck embedded />
-              <div className="ctaRow" style={{ marginTop: 12 }}>
-                <a
-                  className="cta"
-                  href="https://github.com/missjessicahe/MissJess"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Repo ↗
+              <div className="ctaRow">
+                <a className="cta primary" href="/journal">
+                  Open Journal Deck
+                </a>
+                <a className="cta" href="#projects">
+                  See projects
                 </a>
               </div>
             </div>
-          </div>
-        </section>
 
-        <footer className="footer">
-          <div className="footerCard glass">
-            <div className="footerRow">
-              <span>© {new Date().getFullYear()} Miss Jess</span>
-              <span className="dot">·</span>
-              <a href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">
-                github
-              </a>
-              <span className="dot">·</span>
-              <a href="/journal">journal</a>
+            <div className="sideStack">
+              <div className="mini glass">
+                <div className="miniTitle">Now</div>
+                <div className="miniBody">
+                  building <b>missjess.co</b> → journal + project pages
+                </div>
+              </div>
+              <div className="mini glass">
+                <div className="miniTitle">Vibe</div>
+                <div className="miniBody">
+                  soft gradients, glass cards, floating bubbles ✧
+                </div>
+              </div>
+              <div className="mini glass">
+                <div className="miniTitle">How it updates</div>
+                <div className="miniBody">edit → commit → push → auto rebuild</div>
+              </div>
             </div>
-          </div>
-        </footer>
+          </section>
+
+          <section id="projects" className="section">
+            <div className="sectionHeader">
+              <h2>Projects</h2>
+              <p>Little portals into the things I’m building.</p>
+            </div>
+
+            <div className="grid">
+              <a className="card glass" href="/whimsical">
+                <div className="cardTop">
+                  <div className="icon">🍓</div>
+                  <div>
+                    <div className="cardTitle">Whimsical</div>
+                    <div className="cardSub">A playful project showcase</div>
+                  </div>
+                </div>
+                <div className="cardBody">
+                  A cute, demo-friendly page that can mirror your GitHub README later.
+                </div>
+                <div className="cardFoot">Open →</div>
+              </a>
+
+              <a className="card glass" href="/kubesync">
+                <div className="cardTop">
+                  <div className="icon">📻</div>
+                  <div>
+                    <div className="cardTitle">KubeSync</div>
+                    <div className="cardSub">Resilience / comms prototype</div>
+                  </div>
+                </div>
+                <div className="cardBody">
+                  A landing page for the KubeSync concept, links, and updates.
+                </div>
+                <div className="cardFoot">Open →</div>
+              </a>
+
+              <a className="card glass" href="/kubecard">
+                <div className="cardTop">
+                  <div className="icon">🧾</div>
+                  <div>
+                    <div className="cardTitle">KubeCard</div>
+                    <div className="cardSub">Research + literature</div>
+                  </div>
+                </div>
+                <div className="cardBody">
+                  A polished page for write-ups, citations, and artifacts.
+                </div>
+                <div className="cardFoot">Open →</div>
+              </a>
+            </div>
+          </section>
+
+          {/* Journal CTA section */}
+          <section className="section">
+            <div className="sectionHeader">
+              <h2>Journal</h2>
+              <p>Card-style entries with sort + search (updated by commits).</p>
+            </div>
+
+            <div className="journalCtaLeft">
+              <div className="jdPreview">
+                <div className="jdPreviewInner">
+                  <JournalDeck embedded />
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <footer className="footer">
+            <div className="footerCard glass">
+              <div className="footerRow">
+                <span>© {new Date().getFullYear()} Miss Jess</span>
+                <span className="dot">·</span>
+                <a href="https://github.com/missjessicahe" target="_blank" rel="noreferrer">
+                  github
+                </a>
+                <span className="dot">·</span>
+                <a href="/journal">journal</a>
+              </div>
+            </div>
+          </footer>
+        </div>
       </main>
 
-      {/* Cute iOS bubble/glass styling — all contained in this file */}
+      {/* ✅ NOT style jsx — keep this as plain style so it works in Server Components */}
       <style>{`
-        :root{
+        .homeWrap{
           --bg1:#e8f4ff;
           --bg2:#cfe9ff;
           --bg3:#b7ddff;
-          --ink:#0b1a2a;
-          --muted:rgba(11,26,42,.7);
-          --glass:rgba(255,255,255,.58);
-          --stroke:rgba(255,255,255,.5);
-          --shadow: 0 18px 60px rgba(20,60,110,.18);
-          --shadow2: 0 10px 30px rgba(20,60,110,.14);
-          --radius: 22px;
-        }
 
-        *{ box-sizing:border-box; }
-        html,body{ height:100%; }
-        body{
-          margin:0;
+          --ink:#0b1a2a;
+          --muted:rgba(11,26,42,.70);
+
+          --glass:rgba(255,255,255,.58);
+          --stroke:rgba(255,255,255,.62);
+          --stroke2:rgba(11,26,42,.06);
+
+          --shadow: 0 22px 70px rgba(20,60,110,.18);
+          --shadow2: 0 10px 26px rgba(20,60,110,.12);
+
+          --radius: 22px;
+
+          min-height:100vh;
           color:var(--ink);
           font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+
           background:
             radial-gradient(1200px 600px at 10% 10%, #ffffff 0%, transparent 60%),
             radial-gradient(900px 500px at 90% 15%, rgba(255,255,255,.9) 0%, transparent 65%),
@@ -206,13 +214,20 @@ export default function HomePage() {
           overflow-x:hidden;
         }
 
-        a{ color:inherit; text-decoration:none; }
-        a:hover{ opacity:.92; }
+        .homeWrap *{ box-sizing:border-box; }
+        .homeWrap a{ color:inherit; text-decoration:none; }
+        .homeWrap a:hover{ opacity:.95; }
+
+        .homeWrap :focus-visible{
+          outline: 2px solid rgba(70,140,255,.55);
+          outline-offset: 3px;
+          border-radius: 12px;
+        }
 
         .shell{
           position:relative;
           min-height:100vh;
-          padding: 28px 18px 42px;
+          padding: 28px 18px 46px;
           max-width: 1100px;
           margin: 0 auto;
         }
@@ -226,13 +241,14 @@ export default function HomePage() {
           border-radius: var(--radius);
         }
 
-        /* bubbles layer */
+        /* bubbles */
         .bubbles{ position:absolute; inset:0; pointer-events:none; z-index:0; }
         .b{
           position:absolute;
           border-radius:999px;
-          background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.35) 55%, rgba(255,255,255,.12));
-          box-shadow: 0 20px 50px rgba(0,0,0,.08);
+          background:
+            radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(255,255,255,.35) 55%, rgba(255,255,255,.12));
+          box-shadow: 0 18px 55px rgba(0,0,0,.08);
           filter: saturate(1.1);
           animation: floaty 10s ease-in-out infinite;
         }
@@ -263,28 +279,29 @@ export default function HomePage() {
           width:44px; height:44px;
           border-radius: 16px;
           display:grid; place-items:center;
-          font-weight:800;
-          background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255,255,255,.35));
-          border:1px solid rgba(255,255,255,.7);
+          font-weight:850;
+          background: radial-gradient(circle at 30% 30%, #ffffff, rgba(255,255,255,.32));
+          border:1px solid rgba(255,255,255,.75);
           box-shadow: 0 10px 30px rgba(20,60,110,.12);
         }
-        .name{ font-weight:800; letter-spacing:-.02em; }
+        .name{ font-weight:850; letter-spacing:-.02em; }
         .tag{ font-size:13px; color:var(--muted); margin-top:2px; }
 
         .nav{ display:flex; flex-wrap:wrap; gap:10px; justify-content:flex-end; }
         .pill{
           padding: 10px 12px;
           border-radius: 999px;
-          border: 1px solid rgba(255,255,255,.65);
-          background: rgba(255,255,255,.35);
+          border: 1px solid rgba(255,255,255,.70);
+          background: rgba(255,255,255,.34);
           box-shadow: 0 10px 20px rgba(20,60,110,.08);
           font-size: 14px;
-          transition: transform .15s ease;
+          transition: transform .15s ease, background .15s ease;
         }
-        .pill:hover{ transform: translateY(-1px); }
-        .pill.ghost{
-          background: rgba(255,255,255,.22);
+        .pill:hover{
+          transform: translateY(-1px);
+          background: rgba(255,255,255,.42);
         }
+        .pill.ghost{ background: rgba(255,255,255,.22); }
 
         .hero{
           position:relative;
@@ -320,6 +337,7 @@ export default function HomePage() {
           line-height: 1.55;
           max-width: 60ch;
         }
+
         .metaRow{
           display:flex;
           flex-wrap:wrap;
@@ -331,29 +349,32 @@ export default function HomePage() {
           color: rgba(11,26,42,.78);
           padding: 7px 10px;
           border-radius: 999px;
-          background: rgba(255,255,255,.4);
-          border: 1px solid rgba(255,255,255,.65);
+          background: rgba(255,255,255,.42);
+          border: 1px solid rgba(255,255,255,.70);
         }
 
         .ctaRow{ display:flex; gap:10px; flex-wrap:wrap; }
         .cta{
           padding: 11px 14px;
           border-radius: 14px;
-          border: 1px solid rgba(255,255,255,.7);
-          background: rgba(255,255,255,.38);
+          border: 1px solid rgba(255,255,255,.75);
+          background: rgba(255,255,255,.36);
           box-shadow: 0 12px 26px rgba(20,60,110,.10);
-          font-weight: 650;
+          font-weight: 700;
           font-size: 14px;
-          transition: transform .15s ease;
+          transition: transform .15s ease, background .15s ease;
         }
-        .cta:hover{ transform: translateY(-1px); }
+        .cta:hover{
+          transform: translateY(-1px);
+          background: rgba(255,255,255,.46);
+        }
         .cta.primary{
-          background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.35));
+          background: linear-gradient(180deg, rgba(255,255,255,.80), rgba(255,255,255,.34));
         }
 
         .sideStack{ display:grid; gap:12px; }
-        .mini{ padding: 14px 14px 12px; }
-        .miniTitle{ font-weight:800; margin-bottom:6px; letter-spacing:-.02em; }
+        .mini{ padding: 14px 14px 12px; border: 1px solid rgba(255,255,255,.65); }
+        .miniTitle{ font-weight:850; margin-bottom:6px; letter-spacing:-.02em; }
         .miniBody{ color: var(--muted); font-size: 14px; line-height:1.5; }
 
         .section{ position:relative; z-index:1; margin: 26px 0; }
@@ -374,79 +395,82 @@ export default function HomePage() {
         }
         .card{
           padding: 16px 16px 14px;
-          transition: transform .15s ease;
+          transition: transform .15s ease, box-shadow .15s ease;
+          border: 1px solid rgba(255,255,255,.62);
         }
-        .card:hover{ transform: translateY(-2px); }
+        .card:hover{
+          transform: translateY(-2px);
+          box-shadow: var(--shadow);
+        }
         .cardTop{ display:flex; gap:12px; align-items:center; margin-bottom: 10px; }
         .icon{
           width:44px; height:44px;
           border-radius: 16px;
           display:grid; place-items:center;
           background: rgba(255,255,255,.55);
-          border: 1px solid rgba(255,255,255,.7);
+          border: 1px solid rgba(255,255,255,.74);
           box-shadow: 0 10px 20px rgba(20,60,110,.09);
           font-size: 20px;
         }
-        .cardTitle{ font-weight:850; letter-spacing:-.02em; }
+        .cardTitle{ font-weight:900; letter-spacing:-.02em; }
         .cardSub{ color: var(--muted); font-size: 13px; margin-top:2px; }
         .cardBody{ color: var(--muted); font-size: 14px; line-height:1.5; margin: 6px 0 10px; }
-        .cardFoot{ font-weight:700; font-size: 14px; }
+        .cardFoot{ font-weight:800; font-size: 14px; }
 
-        /* journal CTA */
-        .journalCta{
-          padding: 18px;
-          display:flex;
-          gap: 14px;
-          align-items:stretch;
-          justify-content:space-between;
-        }
+        /* Journal preview frame */
         .journalCtaLeft{ flex: 1; min-width: 240px; }
-        .journalCtaRight{
-          display:grid;
-          gap:10px;
-          min-width: 220px;
-          align-content:start;
-          justify-items:stretch;
-        }
-        .journalBadge{
-          display:inline-block;
-          padding: 7px 10px;
-          border-radius: 999px;
-          background: rgba(255,255,255,.4);
+
+        .jdPreview{
+          position: relative;
+          border-radius: 22px;
+          overflow: hidden;
           border: 1px solid rgba(255,255,255,.65);
-          color: rgba(11,26,42,.8);
-          font-size: 13px;
-          margin-bottom: 10px;
+          background: rgba(255,255,255,.22);
+          box-shadow: 0 18px 50px rgba(20,60,110,.12);
+          height: clamp(520px, 60vh, 640px);
         }
-        .journalHeadline{
-          font-weight: 900;
-          letter-spacing:-.02em;
-          font-size: 18px;
-          margin-bottom: 6px;
+
+        .jdPreviewInner{
+          position: relative;
+          z-index: 1;         /* ✅ sits above ::before/::after */
+          height: 100%;
+          overflow: hidden;
+          padding: 14px;
+          min-height: 0;
         }
-        .journalSub{
-          color: var(--muted);
-          font-size: 14px;
-          line-height: 1.55;
-          margin-bottom: 12px;
-          max-width: 60ch;
+
+        /* ✅ no :global here — plain CSS */
+        .jdPreviewInner .jd{
+          position: relative;
+          z-index: 2;
         }
-        .stat{
-          padding: 12px 12px 10px;
-          border-radius: 18px;
-          background: rgba(255,255,255,.35);
-          border: 1px solid rgba(255,255,255,.65);
+
+        .jdPreview::before,
+        .jdPreview::after{
+          content:"";
+          position:absolute;
+          inset: 0;
+          border-radius: 22px;
+          border: 1px solid rgba(255,255,255,.45);
+          background: rgba(255,255,255,.10);
+          pointer-events:none;
+          z-index: 0;
         }
-        .statNum{
-          font-weight: 950;
-          font-size: 22px;
-          line-height: 1;
-          letter-spacing:-.02em;
-        }
-        .statLabel{
-          margin-top: 6px;
-          color: rgba(11,26,42,.72);
-          font-size: 12.5px;
+        .jdPreview::before{ transform: translate(10px, 10px); opacity: .55; }
+        .jdPreview::after{ transform: translate(18px, 18px); opacity: .30; }
+
+        .jdFade{
+          pointer-events: none;
+          position:absolute;
+          left:0; right:0; bottom:0;
+          height: 110px;
+          background: linear-gradient(
+            180deg,
+            rgba(232,244,255,0) 0%,
+            rgba(232,244,255,.85) 55%,
+            rgba(232,244,255,1) 100%
+          );
+          z-index: 3;
         }
 
         .footer{ position:relative; z-index:1; margin-top: 34px; }
@@ -467,12 +491,7 @@ export default function HomePage() {
           .grid{ grid-template-columns: 1fr; }
           .topbar{ flex-direction:column; align-items:flex-start; }
           .nav{ justify-content:flex-start; }
-          .journalCta{ flex-direction:column; }
-          .journalCtaRight{ min-width: unset; grid-template-columns: repeat(3, 1fr); }
         }
-          .jdEmbedded .jdCard{
-            height: 360px;
-          }
       `}</style>
     </>
   );
