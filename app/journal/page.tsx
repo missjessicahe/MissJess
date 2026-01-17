@@ -1,16 +1,28 @@
 // app/journal/page.tsx
+// app/journal/JournalDeck.tsx
 "use client";
 
+import type { ReactNode } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { ALL_ENTRIES } from "./entries";
+
+type Entry = (typeof ALL_ENTRIES)[number] & {
+  tags?: string[];
+  searchText?: string;
+  Card: () => ReactNode;
+};
 
 // helper: show as "Jan 16, 2026"
 function prettyDate(dateISO: string) {
   const d = new Date(dateISO + "T00:00:00");
-  return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "numeric" });
+  return d.toLocaleDateString(undefined, {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 }
 
-// title-only failsafe (matches JournalDeck)
+// title-only failsafe: avoids ID parsing / weird chars
 function normalizeTitleQuery(input: string) {
   return input
     .trim()
@@ -20,33 +32,30 @@ function normalizeTitleQuery(input: string) {
     .slice(0, 60);
 }
 
-export default function JournalPage() {
+export default function JournalDeck(props: { embedded?: boolean }) {
+  const embedded = props.embedded ?? false;
+
   const [sort, setSort] = useState<"newest" | "oldest">("newest");
   const [dateQuery, setDateQuery] = useState<string>(""); // YYYY-MM-DD
   const [q, setQ] = useState<string>(""); // title search
   const [index, setIndex] = useState(0);
 
-  const [expanded, setExpanded] = useState(false);
-
-  const sorted = useMemo(() => {
-    const copy = [...ALL_ENTRIES].sort((a, b) => {
+  const sorted = useMemo<Entry[]>(() => {
+    const copy = [...ALL_ENTRIES] as Entry[];
+    copy.sort((a, b) => {
       if (a.dateISO === b.dateISO) return 0;
-      return sort === "newest"
-        ? a.dateISO < b.dateISO
-          ? 1
-          : -1
-        : a.dateISO < b.dateISO
-        ? -1
-        : 1;
+      return sort === "newest" ? (a.dateISO < b.dateISO ? 1 : -1) : a.dateISO < b.dateISO ? -1 : 1;
     });
     return copy;
   }, [sort]);
 
-  const filtered = useMemo(() => {
-    let list = sorted;
+  const filtered = useMemo<Entry[]>(() => {
+    let list: Entry[] = sorted;
 
+    // date filter
     if (dateQuery) list = list.filter((e) => e.dateISO === dateQuery);
 
+    // title-only failsafe
     const query = normalizeTitleQuery(q);
     if (query) {
       list = list.filter((e) => (e.title ?? "").toLowerCase().includes(query));
@@ -55,6 +64,7 @@ export default function JournalPage() {
     return list;
   }, [sorted, dateQuery, q]);
 
+  // keep index valid when filters change
   useEffect(() => {
     setIndex(0);
   }, [sort, dateQuery, q]);
@@ -62,8 +72,8 @@ export default function JournalPage() {
   const total = ALL_ENTRIES.length;
   const showing = filtered.length;
 
-  const current = showing > 0 ? (filtered[index] as any) : null;
-  const CardComp = current?.Card;
+  const current: Entry | null = showing > 0 ? filtered[index] : null;
+  const CardComp = current?.Card ?? null;
 
   function prev() {
     if (showing === 0) return;
@@ -87,219 +97,151 @@ export default function JournalPage() {
     setIndex(0);
   }
 
-  // keyboard arrows + Esc
+  // keyboard arrows (only when NOT embedded)
   useEffect(() => {
+    if (embedded) return;
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setExpanded(false);
       if (e.key === "ArrowLeft") prev();
       if (e.key === "ArrowRight") next();
     }
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showing]);
-
-  // lock body scroll during modal
-  useEffect(() => {
-    if (!expanded) return;
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.body.style.overflow = prevOverflow;
-    };
-  }, [expanded]);
+  }, [showing, embedded]);
 
   return (
-    <>
-      <main className="wrap">
-        <header className="top">
-          <a className="back" href="/">
-            ← back home
-          </a>
+    <div className={`jd ${embedded ? "jdEmbedded" : ""}`}>
+      <div className="jdTop">
+        {!embedded ? (
+          <>
+            <div className="jdBadge">journal</div>
+            <div className="jdTitle">Journal Deck</div>
+            <div className="jdDesc">Card-style entries, searchable by date + title, sortable by time.</div>
+          </>
+        ) : (
+          <>
+            <div className="jdBadge">💌 journal deck</div>
+            <div className="jdTitle">Flip through entries like a slideshow</div>
+            <div className="jdDesc">No database. Just commits.</div>
+          </>
+        )}
+      </div>
 
-          <div className="right">
-            <a className="pill" href="/whimsical">
-              Whimsical
-            </a>
-            <a className="pill" href="/kubesync">
-              KubeSync
-            </a>
-            <a className="pill" href="/kubecard">
-              KubeCard
-            </a>
-          </div>
-        </header>
+      <div className="jdControls">
+        <div className="jdControl">
+          <label>Order</label>
+          <select value={sort} onChange={(e) => setSort(e.target.value as any)}>
+            <option value="newest">Most recent</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
 
-        <section className="hero glass">
-          <div className="badge">📓 journal</div>
-          <h1>Journal Deck</h1>
-          <p>Card-style entries, searchable by date + title, sortable by time. Updates by commits only.</p>
+        <div className="jdControl">
+          <label>Search by date</label>
+          <input type="date" value={dateQuery} onChange={(e) => setDateQuery(e.target.value)} />
+        </div>
 
-          <div className="controls">
-            <div className="control">
-              <label>Order</label>
-              <select value={sort} onChange={(e) => setSort(e.target.value as any)}>
-                <option value="newest">Most recent</option>
-                <option value="oldest">Oldest</option>
-              </select>
-            </div>
+        <div className="jdControl">
+          <label>Search titles</label>
+          <input
+            type="text"
+            placeholder="try: build log"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+          />
+          <div className="jdHint">Title-only failsafe — no IDs, no parsing.</div>
+        </div>
 
-            <div className="control">
-              <label>Search by date</label>
-              <input type="date" value={dateQuery} onChange={(e) => setDateQuery(e.target.value)} />
-            </div>
+        <div className="jdCounter">
+          <div className="jdCountBig">{showing}</div>
+          <div className="jdCountSmall">showing / {total} total</div>
+        </div>
+      </div>
 
-            <div className="control">
-              <label>Search titles</label>
-              <input
-                type="text"
-                placeholder="try: build log"
-                value={q}
-                onChange={(e) => setQ(e.target.value)}
-              />
-              <div className="hint">Title-only search (failsafe) — no IDs, no parsing.</div>
-            </div>
+      <div className="jdDeckTopRow">
+        <div className="jdNav">
+          <button className="jdBtn jdBtnPrimary" onClick={newest}>
+            Newest
+          </button>
+          <button className="jdBtn" onClick={prev} disabled={showing === 0}>
+            ←
+          </button>
+          <button className="jdBtn" onClick={next} disabled={showing === 0}>
+            →
+          </button>
+          <button className="jdBtn" onClick={random} disabled={showing === 0}>
+            shuffle
+          </button>
+        </div>
 
-            <div className="counter">
-              <div className="countBig">{showing}</div>
-              <div className="countSmall">showing / {total} total</div>
-            </div>
-          </div>
-        </section>
-
-        <section className="deckArea">
-          <div className="deckTopRow">
-            <div className="deckNav">
-              <button className="btn primary" onClick={newest}>
-                Newest
-              </button>
-              <button className="btn" onClick={prev} disabled={showing === 0}>
-                ←
-              </button>
-              <button className="btn" onClick={next} disabled={showing === 0}>
-                →
-              </button>
-              <button className="btn" onClick={random} disabled={showing === 0}>
-                shuffle
-              </button>
-            </div>
-
-            <div className="deckMeta">
-              {showing === 0 || !current ? (
-                <span className="pillSoft">No entries match that filter.</span>
-              ) : (
-                <>
-                  <span className="pillSoft">
-                    {index + 1} / {showing}
-                  </span>
-                  <span className="pillSoft">{prettyDate(current.dateISO)}</span>
-                  <span className="pillSoft">{current.mood}</span>
-                  <button className="pillBtn" onClick={() => setExpanded(true)}>
-                    Expand ⤢
-                  </button>
-                </>
-              )}
-            </div>
-          </div>
-
-          {showing === 0 ? (
-            <div className="empty glass">
-              <h3>No matches</h3>
-              <p>Try clearing the date and title filters.</p>
-              <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-                <button className="btn primary" onClick={() => setDateQuery("")}>
-                  Clear date
-                </button>
-                <button className="btn primary" onClick={() => setQ("")}>
-                  Clear title
-                </button>
-                <button className="btn primary" onClick={newest}>
-                  Reset
-                </button>
-              </div>
-            </div>
+        <div className="jdMeta">
+          {showing === 0 || !current ? (
+            <span className="jdPillSoft">No entries match that filter.</span>
           ) : (
-            <article className="card glass">
-              <div className="cardHead">
-                <div>
-                  <div className="title">{current.title}</div>
-                  <div className="sub">{prettyDate(current.dateISO)}</div>
-                </div>
+            <>
+              <span className="jdPillSoft">
+                {index + 1} / {showing}
+              </span>
+              <span className="jdPillSoft">{prettyDate(current.dateISO)}</span>
+              <span className="jdPillSoft">{current.mood}</span>
+            </>
+          )}
+        </div>
+      </div>
 
-                {current.tags?.length ? (
-                  <div className="tags">
-                    {current.tags.slice(0, 4).map((t) => (
-                      <span className="tag" key={`${current.id}-${t}`}>
-                        #{t}
-                      </span>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
+      {showing === 0 || !current ? (
+        <div className="jdEmpty">
+          <div className="jdEmptyTitle">No matches</div>
+          <div className="jdEmptySub">Try clearing the date and title filters.</div>
+          <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+            <button className="jdBtn jdBtnPrimary" onClick={() => setDateQuery("")}>
+              Clear date
+            </button>
+            <button className="jdBtn jdBtnPrimary" onClick={() => setQ("")}>
+              Clear title
+            </button>
+            <button className="jdBtn jdBtnPrimary" onClick={newest}>
+              Reset
+            </button>
+          </div>
+        </div>
+      ) : (
+        <article className="jdCard">
+          <div className="jdCardHead">
+            <div>
+              <div className="jdCardTitle">{current.title}</div>
+              <div className="jdCardSub">{prettyDate(current.dateISO)}</div>
+            </div>
 
-              {/* Explicit scroll area */}
-              <div className="cardBody" aria-label="Entry content (scrollable)">
-                <div className="scrollHintTop" />
-                {CardComp ? <CardComp /> : null}
-                <div className="scrollHintBottom" />
-              </div>
-
-              <div className="dots" aria-label="Entry dots">
-                {filtered.map((e, i) => (
-                  <button
-                    key={`${e.id}-${e.dateISO}-${i}`}
-                    className={`dot ${i === index ? "active" : ""}`}
-                    onClick={() => setIndex(i)}
-                    aria-label={`Go to ${e.title}`}
-                  />
+            {/* IMPORTANT: use { ... } not [ ... ] */}
+            {current.tags?.length ? (
+              <div className="jdTags">
+                {current.tags.slice(0, 4).map((t) => (
+                  <span className="jdTag" key={`${current.id}-${t}`}>
+                    #{t}
+                  </span>
                 ))}
               </div>
-            </article>
-          )}
-        </section>
-
-        <footer className="foot">
-          <div className="footCard glass">
-            <span className="muted">Tip:</span> Use ← → arrow keys to flip cards. Press Esc to close Expand.
+            ) : null}
           </div>
-        </footer>
 
-        <div className="bubbles" aria-hidden="true">
-          <span className="b b1" />
-          <span className="b b2" />
-          <span className="b b3" />
-          <span className="b b4" />
-          <span className="b b5" />
-        </div>
-      </main>
+          <div className="jdCardBody">{CardComp ? <CardComp /> : null}</div>
 
-      {/* Expand modal */}
-      {expanded && current ? (
-        <div className="modalBackdrop" role="dialog" aria-modal="true" onClick={() => setExpanded(false)}>
-          <div className="modal" onClick={(e) => e.stopPropagation()}>
-            <div className="modalHead">
-              <div>
-                <div className="modalTitle">{current.title}</div>
-                <div className="modalSub">
-                  {prettyDate(current.dateISO)} · {current.mood}
-                </div>
-              </div>
-              <button className="btn" onClick={() => setExpanded(false)}>
-                Close ✕
-              </button>
-            </div>
-
-            <div className="modalBody" aria-label="Expanded entry content (scrollable)">
-              <div className="scrollHintTop" />
-              {current.Card ? <current.Card /> : null}
-              <div className="scrollHintBottom" />
-            </div>
+          <div className="jdDots" aria-label="Entry dots">
+            {filtered.map((e, i) => (
+              <button
+                key={`${e.id}-${e.dateISO}-${i}`}
+                className={`jdDot ${i === index ? "active" : ""}`}
+                onClick={() => setIndex(i)}
+                aria-label={`Go to ${e.title}`}
+              />
+            ))}
           </div>
-        </div>
-      ) : null}
+        </article>
+      )}
 
       <style>{styles}</style>
-    </>
+    </div>
   );
 }
 
