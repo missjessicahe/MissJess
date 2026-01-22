@@ -1,0 +1,256 @@
+/* =========================
+   Wharf Portal (search.html) — REM VERSION
+========================= */
+
+.wharf-page {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(180deg, #f7fbff 0%, #eef6ff 35%, #e9f3ff 100%);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+
+  /* allow scroll */
+  overflow-y: auto;
+}
+
+.wharf-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 1.75rem 1rem; /* 28px 16px */
+}
+
+.wharf-card {
+  width: min(57.5rem, 96vw); /* 920px */
+  background: rgba(255,255,255,0.92);
+  border: 0.0625rem solid rgba(90,120,160,0.18); /* 1px */
+  border-radius: 1.375rem; /* 22px */
+  box-shadow: 0 1.375rem 3.75rem rgba(30, 70, 120, 0.18); /* 22px 60px */
+  overflow: hidden;
+}
+
+.wharf-header {
+  padding: 1.375rem 1.375rem 1.125rem; /* 22 22 18 */
+  border-bottom: 0.0625rem solid rgba(90,120,160,0.12);
+}
+
+.wharf-title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem; /* 10px */
+}
+
+.wharf-title h1 {
+  margin: 0;
+  font-size: 1.75rem; /* 28px */
+  letter-spacing: -0.02em;
+  color: #143454;
+}
+
+.wharf-emoji { font-size: 1.625rem; } /* 26px */
+
+.wharf-subtitle {
+  margin: 0.5rem 0 0; /* 8px */
+  color: rgba(20, 52, 84, 0.72);
+  line-height: 1.35;
+}
+
+.wharf-heroRow {
+  display: grid;
+  grid-template-columns: 20rem 1fr; /* 320px */
+  gap: 1rem; /* 16px */
+  padding: 1.125rem 1.375rem 0.375rem; /* 18 22 6 */
+}
+
+.wharf-hero {
+  width: 100%;
+  height: 12.5rem; /* 200px */
+  object-fit: cover;
+  border-radius: 1.125rem; /* 18px */
+  border: 0.0625rem solid rgba(90,120,160,0.18);
+  box-shadow: 0 0.625rem 1.5rem rgba(20,52,84,0.10); /* 10 24 */
+}
+
+.wharf-heroText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.625rem; /* 10px */
+}
+
+.wharf-pill {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.5rem 0.625rem; /* 8 10 */
+  border-radius: 999rem;
+  background: rgba(120, 200, 255, 0.18);
+  border: 0.0625rem solid rgba(120, 200, 255, 0.28);
+  color: #143454;
+  font-weight: 600;
+  font-size: 0.9375rem; /* 15px-ish vibe */
+}
+
+.wharf-note {
+  color: rgba(20, 52, 84, 0.78);
+  line-height: 1.35;
+  font-size: 1rem;
+}
+
+.wharf-form {
+  padding: 0.875rem 1.375rem 1.375rem; /* 14 22 22 */
+}
+
+.wharf-field {
+  margin-top: 0.875rem; /* 14px */
+}
+
+.wharf-field label {
+  display: block;
+  font-weight: 700;
+  color: #143454;
+  margin-bottom: 0.5rem; /* 8px */
+  font-size: 1rem;
+}
+
+.wharf-row {
+  display: flex;
+  gap: 0.625rem; /* 10px */
+  flex-wrap: wrap;
+}
+
+.wharf-row input {
+  flex: 1;
+  min-width: 15rem; /* 240px */
+  padding: 0.625rem 0.75rem; /* 10 12 */
+  border-radius: 0.875rem; /* 14px */
+  border: 0.0625rem solid rgba(20,52,84,0.18);
+  outline: none;
+  background: rgba(255,255,255,0.9);
+  font-size: 1rem;
+}
+
+.wharf-row input:focus {
+  border-color: rgba(120,200,255,0.7);
+  box-shadow: 0 0 0 0.25rem rgba(120,200,255,0.20); /* 4px */
+}
+
+.wharf-hint {
+  margin-top: 0.5rem; /* 8px */
+  color: rgba(20, 52, 84, 0.62);
+  font-size: 0.8125rem; /* 13px */
+}
+
+.wharf-actions {
+  margin-top: 1.125rem; /* 18px */
+  display: flex;
+  gap: 0.625rem; /* 10px */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.wharf-btn {
+  padding: 0.625rem 0.75rem; /* 10 12 */
+  border-radius: 0.875rem; /* 14px */
+  border: 0.0625rem solid rgba(20,52,84,0.20);
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  color: #143454;
+  font-weight: 700;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.wharf-btn:hover { box-shadow: 0 0.625rem 1.375rem rgba(20,52,84,0.10); } /* 10 22 */
+
+.wharf-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.wharf-btn.primary {
+  background: rgba(120,200,255,0.22);
+  border-color: rgba(120,200,255,0.35);
+}
+
+.wharf-btn.ghost {
+  background: rgba(255,255,255,0.6);
+}
+
+.wharf-btn.link {
+  background: transparent;
+  border-color: transparent;
+  color: rgba(20,52,84,0.70);
+  font-weight: 700;
+}
+
+.wharf-status {
+  margin-top: 0.875rem; /* 14px */
+  padding: 0.75rem; /* 12px */
+  border-radius: 1rem; /* 16px */
+  border: 0.0625rem solid rgba(20,52,84,0.14);
+  background: rgba(255,255,255,0.75);
+}
+
+.wharf-status pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.78125rem; /* 12.5px */
+  color: rgba(20,52,84,0.85);
+}
+
+.wharf-status.error { border-color: rgba(255, 80, 80, 0.35); }
+.wharf-status.success { border-color: rgba(80, 200, 120, 0.35); }
+
+.wharf-result {
+  margin-top: 0.75rem; /* 12px */
+  padding: 0.625rem 0.75rem; /* 10 12 */
+  border-radius: 1rem; /* 16px */
+  border: 0.0625rem solid rgba(20,52,84,0.12);
+  background: rgba(255,255,255,0.65);
+}
+
+.wharf-result pre {
+  margin: 0.625rem 0 0; /* 10px */
+  font-size: 0.75rem; /* 12px */
+  white-space: pre-wrap;
+}
+
+.wharf-footer {
+  margin-top: 0.875rem; /* 14px */
+  color: rgba(20, 52, 84, 0.62);
+  font-size: 0.8125rem; /* 13px */
+}
+
+/* =========================
+   Wharf Portal – FIXES (REM)
+========================= */
+
+/* Create space for top glass bar */
+.mj-topbar {
+  height: auto;
+  padding-top: 1rem;   /* 16px */
+  padding-bottom: 0.75rem; /* 12px */
+}
+
+/* Push main content below topbar blur */
+.mj-main {
+  padding-top: 0.875rem; /* 14px */
+}
+
+@media (max-width: 47.5rem) { /* 760px */
+  .wharf-heroRow {
+    grid-template-columns: 1fr;
+  }
+  .wharf-hero { height: 11.25rem; } /* 180px */
+
+  .mj-main {
+    padding-top: 0.5rem; /* 8px */
+  }
+
+  .wharf-card {
+    border-radius: 1.125rem; /* 18px */
+  }
+}

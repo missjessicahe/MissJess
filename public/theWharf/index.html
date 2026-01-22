@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>SMOG Control Console</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- React 18 -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Babel (dev only) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- load order -->
+  <script type="text/babel" src="helpers.js"></script>
+  <script type="text/babel" src="graphs.js"></script>
+
+  <script type="text/babel" src="villageHearth.js"></script>
+  <script type="text/babel" src="network.js"></script>
+  <script type="text/babel" src="worldMood.js"></script>
+  <script type="text/babel" src="warnings.js"></script>
+  <script type="text/babel" src="villagerJournals.js"></script>
+  <script type="text/babel" src="villagerLedger.js"></script>
+
+  <script type="text/babel" src="portal.js"></script>
+  <script type="text/babel" src="app.js"></script>
+
+</body>
+</html>

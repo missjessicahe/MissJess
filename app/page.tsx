@@ -31,6 +31,9 @@ export default function HomePage() {
             </div>
 
             <nav className="nav">
+              <a className="pill" href="/theWharf">
+                the Wharf
+              </a>
               <a className="pill" href="/whimsical">
                 Whimsical
               </a>
@@ -106,6 +109,20 @@ export default function HomePage() {
             </div>
 
             <div className="grid">
+              <a className="card glass" href="/theWharf">
+                <div className="cardTop">
+                  <div className="icon">🗺️</div>
+                  <div>
+                    <div className="cardTitle">the Wharf</div>
+                    <div className="cardSub"> 'minecraft podcast'</div>
+                  </div>
+                </div>
+                <div className="cardBody">
+                  Custom modpack for the 'Cookie Factory' letsplay series.
+                </div>
+                <div className="cardFoot">Open →</div>
+              </a>
+
               <a className="card glass" href="/whimsical">
                 <div className="cardTop">
                   <div className="icon">🍓</div>

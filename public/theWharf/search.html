@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Wharf Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- React 18 -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+
+  <!-- Babel (dev only) -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin></script>
+
+  <!-- ✅ IMPORTANT: relative path so it works under /theWharf/ -->
+  <link rel="stylesheet" href="./styles.css" />
+
+  <style>
+    /* --- MissJess shell wrapper (light touch, doesn't fight your app) --- */
+    .mj-shell{
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mj-topbar{
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      padding: 14px 16px 8px;
+      background: linear-gradient(
+        180deg,
+        rgba(10,10,12,0.72),
+        rgba(10,10,12,0.28),
+        rgba(10,10,12,0)
+      );
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .mj-row{
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .mj-back{
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-weight: 750;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      transition: transform .15s ease, background .15s ease;
+      user-select: none;
+    }
+    .mj-back:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.09);
+    }
+
+    .mj-meta{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.78);
+      font-weight: 700;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .mj-dot{ opacity: .55; }
+
+    /* root area */
+    .mj-main{
+      flex: 1;
+      width: 100%;
+    }
+
+    /* footer matches your portfolio style: right aligned rectangle */
+    .mj-foot{
+      padding: 18px 16px 22px;
+    }
+    .mj-footInner{
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .mj-footCard{
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-end;
+
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      padding: 12px 14px;
+
+      box-shadow: 0 12px 26px rgba(0,0,0,0.25);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      color: rgba(255,255,255,0.75);
+      font-weight: 750;
+      font-size: 13.5px;
+      letter-spacing: -0.01em;
+    }
+    .mj-footCard a{
+      color: inherit;
+      text-decoration: none;
+      opacity: .9;
+    }
+    .mj-footCard a:hover{ opacity: 1; }
+
+    /* make sure your app still fills width */
+    #root{
+      width: 100%;
+    }
+
+    /* optional: make focus visible */
+    a:focus-visible{
+      outline: 2px solid rgba(120,170,255,0.55);
+      outline-offset: 3px;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body class="wharf-page">
+  <div class="mj-shell">
+    <!-- Top bar -->
+    <header class="mj-topbar">
+      <div class="mj-row">
+        <a class="mj-back" href="/" aria-label="Back to Miss Jess portfolio">
+          ← Back to portfolio
+        </a>
+
+        <div class="mj-meta" aria-label="Context">
+          <span>the Wharf</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- App -->
+    <main class="mj-main">
+      <div id="root"></div>
+    </main>
+
+  </div>
+
+  <!-- ✅ IMPORTANT: relative path so it works under /theWharf/ -->
+  <script type="text/babel" src="./portal.js"></script>
+
+  <script type="text/babel">
+    // mount react app
+    const root = ReactDOM.createRoot(document.getElementById("root"));
+    root.render(<WharfPortal />);
+  </script>
+</body>
+</html>
